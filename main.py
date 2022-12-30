@@ -10,6 +10,10 @@ from src.resources.token import token_router
 
 app = FastAPI()
 
+"""
+run from here
+"""
+
 app.include_router(token_router, prefix="/yeh-zindagi/api/user/token")
 app.include_router(add_user_router, prefix="/yeh-zindagi/api/user/sign-up")
 app.include_router(change_pass_router, prefix="/yeh-zindagi/api/user/change-pass")
