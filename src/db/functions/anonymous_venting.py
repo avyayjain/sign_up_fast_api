@@ -4,11 +4,11 @@ from src.db.errors import DataInjectionError, DatabaseErrors, DatabaseConnection
 from src.db.utils import DBConnection
 
 
-def add_vent(id, text):
+def add_vent(id, text,picture):
     with DBConnection(DB_CONNECTION_LINK, False) as db:
         vent = Vent(
             v_id=id,
-            # v_picture=picture,
+            v_picture=picture,
             v_text=text,
         )
         db.session.add(vent)

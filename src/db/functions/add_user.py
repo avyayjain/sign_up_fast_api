@@ -5,7 +5,7 @@ from src.db.errors import DataInjectionError, DatabaseErrors, DatabaseConnection
 from src.db.utils import DBConnection
 
 
-def create_user(user_email: str, password: str, user_id, disabled=False):
+def create_user(user_name: str, user_email: str, password: str):
     """
     Add a Translator User
 
@@ -19,11 +19,10 @@ def create_user(user_email: str, password: str, user_id, disabled=False):
         with DBConnection(DB_CONNECTION_LINK, False) as db:
             try:
                 user = Users(
+                    name = user_name,
                     email_id=user_email,
-                    hashed_password=get_password_hash(password),
-                    disable=disabled,
-                    logout=True,
-                    user_id=user_id,
+                    hashed_password=password,
+
                 )
                 db.session.add(user)
                 db.session.commit()

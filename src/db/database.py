@@ -2,8 +2,8 @@ from sqlalchemy import (
     Boolean,
     Column,
     String, Integer,
+BIGINT
 )
-
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -15,9 +15,6 @@ class Users(Base):
     email_id = Column(String, primary_key=True, nullable=False)
     name = Column(String, nullable=True)
     hashed_password = Column(String, nullable=False)
-    disable = Column(Boolean, nullable=False)
-    logout = Column(Boolean, nullable=False)
-    user_id = Column(String, nullable=False, unique=True)
 
 
 class Therapist(Base):
@@ -25,13 +22,17 @@ class Therapist(Base):
 
     t_name = Column(String, primary_key=True, nullable=False)
     t_city = Column(String, nullable=False)
-    t_phone = Column(Integer, nullable=True)
-    t_email = Column(String, nullable=True)
+    t_address = Column(String, nullable=False)
+    t_dis = Column(String, nullable=False)
+    t_services = Column(String, nullable=False)
+    t_phone = Column(BIGINT, nullable=True)
+    t_picture = Column(String, nullable=True)
+    t_spec = Column(String,nullable=False)
 
 
 class Vent(Base):
     __tablename__ = "anonymous_vent"
 
-    v_id = Column(String, primary_key=True, nullable=False)
-    # v_picture = Column(String, nullable=False)
-    v_text = Column(Integer, nullable=True)
+    v_id = Column(Integer, primary_key=True, nullable=False)
+    v_picture = Column(String, nullable=False)
+    v_text = Column(String, nullable=True)

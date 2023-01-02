@@ -10,11 +10,12 @@ anonymous_venting_router = APIRouter()
 class Vent(BaseModel):
     id: str
     text: str
+    picture:str
 
 
 @anonymous_venting_router.post("/add")
 def add_venting(vent: Vent):
-    v_id = add_vent(vent.id, vent.text)
+    v_id = add_vent(vent.id, vent.text,vent.picture)
 
     return {"data": "vent added successfully",
             "vent_id": v_id}
