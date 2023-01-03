@@ -11,7 +11,7 @@ add_user_router = APIRouter()
 class AuthAddUser(BaseModel):
     email: str
     password: str
-    user_id: str
+    name: str
 
 
 class DeleteUser(BaseModel):
@@ -28,9 +28,10 @@ async def login_for_access_token(
     """
     try:
         create_user(
+            name=form_data.name,
             user_email=form_data.email,
             password=form_data.password,
-            user_id=form_data.user_id,
+
         )
         return {"detail": "User Added"}
     except Exception as e:

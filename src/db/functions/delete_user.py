@@ -17,7 +17,7 @@ def delete_user(user_email):
     @rtype: None
     """
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 data = (
                     db.session.query(Users).filter(Users.email_id == user_email).first()

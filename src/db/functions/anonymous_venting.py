@@ -5,7 +5,7 @@ from src.db.utils import DBConnection
 
 
 def add_vent(id, text,picture):
-    with DBConnection(DB_CONNECTION_LINK, False) as db:
+    with DBConnection( False) as db:
         vent = Vent(
             v_id=id,
             v_picture=picture,
@@ -19,10 +19,10 @@ def add_vent(id, text,picture):
 
 def get_vents():
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.querry(Vent).all()
+                    db.session.query(Vent).all()
                 )
                 if not data:
                     raise ItemNotFound

@@ -8,7 +8,7 @@ from src.db.utils import DBConnection
 def create_user(t_name: str, t_city: str, t_phone: int, t_email: str, t_address: str, t_dis: str, t_services: str,
                 t_picture: str):
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 therapist = Therapist(
                     t_name=t_name,

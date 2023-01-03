@@ -1,8 +1,7 @@
 from sqlalchemy import (
-    Boolean,
     Column,
     String, Integer,
-BIGINT
+    BIGINT
 )
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -27,7 +26,7 @@ class Therapist(Base):
     t_services = Column(String, nullable=False)
     t_phone = Column(BIGINT, nullable=True)
     t_picture = Column(String, nullable=True)
-    t_spec = Column(String,nullable=False)
+    t_spec = Column(String, nullable=False)
 
 
 class Vent(Base):

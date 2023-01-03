@@ -7,7 +7,7 @@ from src.db.utils import DBConnection
 def therapist_info(t_name: str, t_city: str, t_phone: int, t_address: str, t_dis: str, t_services: str,
                    t_picture: str, t_spec: str):
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection(False) as db:
             try:
                 therapist = Therapist(
                     t_name=t_name,
@@ -33,10 +33,10 @@ def therapist_info(t_name: str, t_city: str, t_phone: int, t_address: str, t_dis
 
 def get_therapist_info():
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection(False) as session:
             try:
                 data = (
-                    db.session.querry(Therapist).all()
+                    session.query(Therapist).all()
                 )
                 if not data:
                     raise ItemNotFound
@@ -46,15 +46,18 @@ def get_therapist_info():
                         "name": data.t_name,
                         "city": data.t_city,
                         "phone": data.t_phone,
-                        "email": data.t_email
+                        "description": data.t_dis,
+                        "services": data.t_services,
+                        "picture": data.t_picture,
+                        "specialization": data.t_spec,
+                        "address": data.t_address,
                     }
                     response.append(therapist)
 
                 return response
             except:
                 raise DataInjectionError
-            finally:
-                db.session.close()
+
     except DatabaseErrors:
         raise
     except Exception:

@@ -3,6 +3,8 @@ import datetime
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
 
+from src.common.utils.constants import DB_CONNECTION_LINK
+
 
 class CustomBaseModel:
     """ Generalize _init, __repr_ and to_json
@@ -46,22 +48,21 @@ class CustomBaseModel:
         }
 
 
+engine = create_engine(DB_CONNECTION_LINK)
+
+
 class DBConnection:
     """SQLAlchemy database connection"""
 
-    def __init__(self, connection_string, expire_commit=None):
+    def __init__(self, expire_commit=None):
         self.expire_commit = expire_commit if expire_commit is None else True
-        self.connection_string = connection_string
         self.session = None
 
     def __enter__(self):
-        self.engine = create_engine(self.connection_string)
-        Session = sessionmaker(expire_on_commit=self.expire_commit)
-        self.session = Session(bind=self.engine)
-        return self
+        self.session = sessionmaker(bind=engine, expire_on_commit=self.expire_commit)()
+        return self.session
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.engine.dispose()
         self.session.close()
 
 

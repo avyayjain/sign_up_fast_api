@@ -18,7 +18,7 @@ def find_user_pass(user_email):
     @rtype: Tuple[str,bool]
     """
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 data = (
                     db.session.query(Users).filter(Users.email_id == user_email).first()

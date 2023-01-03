@@ -16,7 +16,7 @@ def user_login(user_email: str):
     :return: None
     """
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 data = (
                     db.session.query(Users).filter(Users.email_id == user_email).first()
@@ -42,7 +42,7 @@ def user_logout(user_email: str):
     :return: None
     """
     try:
-        with DBConnection(DB_CONNECTION_LINK, False) as db:
+        with DBConnection( False) as db:
             try:
                 data = (
                     db.session.query(Users).filter(Users.email_id == user_email).first()
