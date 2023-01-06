@@ -21,13 +21,15 @@ def create_user(user_name: str, user_email: str, password: str):
                     hashed_password=password,
 
                 )
-                db.session.add(user)
-                db.session.commit()
-            except Exception:
+                db.add(user)
+                db.commit()
+                return {"message":"user added successfully"}
+            except Exception as e:
+                print(e)
                 raise DataInjectionError
-            finally:
-                db.session.close()
+
     except DatabaseErrors:
         raise
-    except Exception:
+    except Exception as e:
+        print(e)
         raise DatabaseConnectionError

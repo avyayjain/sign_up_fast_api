@@ -19,12 +19,12 @@ def therapist_info(t_name: str, t_city: str, t_phone: int, t_address: str, t_dis
                     t_services=t_services,
                     t_spec=t_spec
                 )
-                db.session.add(therapist)
-                db.session.commit()
+                db.add(therapist)
+                db.commit()
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

@@ -21,16 +21,16 @@ def update_pass(user_email: str, password: str):
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Users).filter(Users.email_id == user_email).first()
+                    db.query(Users).filter(Users.email_id == user_email).first()
                 )
                 if not data:
                     raise ItemNotFound
                 data.hashed_password = get_password_hash(password)
-                db.session.commit()
+                db.commit()
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

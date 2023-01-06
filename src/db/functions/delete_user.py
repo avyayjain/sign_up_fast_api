@@ -20,18 +20,18 @@ def delete_user(user_email):
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Users).filter(Users.email_id == user_email).first()
+                    db.query(Users).filter(Users.email_id == user_email).first()
                 )
                 if not data:
                     raise ItemNotFound
-                db.session.delete(data)
-                db.session.commit()
+                db.delete(data)
+                db.commit()
             except DatabaseErrors:
                 raise
             except Exception:
                 raise DataExtractionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

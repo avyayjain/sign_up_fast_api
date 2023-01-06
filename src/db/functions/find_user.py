@@ -38,7 +38,7 @@ def find_user_pass(user_email):
             except Exception:
                 raise DataExtractionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

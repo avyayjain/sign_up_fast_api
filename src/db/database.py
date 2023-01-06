@@ -12,7 +12,7 @@ class Users(Base):
     __tablename__ = "user_info"
 
     email_id = Column(String, primary_key=True, nullable=False)
-    name = Column(String, nullable=True)
+    name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
 
 
@@ -33,5 +33,5 @@ class Vent(Base):
     __tablename__ = "anonymous_vent"
 
     v_id = Column(Integer, primary_key=True, nullable=False)
-    v_picture = Column(String, nullable=False)
+    v_picture = Column(String, nullable=True)
     v_text = Column(String, nullable=True)

@@ -18,7 +18,7 @@ def forget_user(user_email: str, password: str, user_id, disabled=False):
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Users).filter(Users.email_id == user_email).first()
+                    db.query(Users).filter(Users.email_id == user_email).first()
                 )
 
                 if not data:
@@ -29,15 +29,15 @@ def forget_user(user_email: str, password: str, user_id, disabled=False):
                         logout=True,
                         user_id=user_id,
                     )
-                    db.session.add(user)
+                    db.add(user)
                 else:
                     data.hashed_password = get_password_hash(password)
 
-                db.session.commit()
+                db.commit()
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

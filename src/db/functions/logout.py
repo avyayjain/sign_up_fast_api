@@ -19,16 +19,16 @@ def user_login(user_email: str):
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Users).filter(Users.email_id == user_email).first()
+                    db.query(Users).filter(Users.email_id == user_email).first()
                 )
                 if not data:
                     raise ItemNotFound
                 data.logout = False
-                db.session.commit()
+                db.commit()
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:
@@ -45,16 +45,16 @@ def user_logout(user_email: str):
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Users).filter(Users.email_id == user_email).first()
+                    db.query(Users).filter(Users.email_id == user_email).first()
                 )
                 if not data:
                     raise ItemNotFound
                 data.logout = True
-                db.session.commit()
+                db.commit()
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:

@@ -11,9 +11,9 @@ def add_vent(id, text,picture):
             v_picture=picture,
             v_text=text,
         )
-        db.session.add(vent)
-        db.session.commit()
-        db.session.close()
+        db.add(vent)
+        db.commit()
+        db.close()
         return id
 
 
@@ -22,7 +22,7 @@ def get_vents():
         with DBConnection( False) as db:
             try:
                 data = (
-                    db.session.query(Vent).all()
+                    db.query(Vent).all()
                 )
                 if not data:
                     raise ItemNotFound
@@ -38,7 +38,7 @@ def get_vents():
             except:
                 raise DataInjectionError
             finally:
-                db.session.close()
+                db.close()
     except DatabaseErrors:
         raise
     except Exception:
