@@ -10,7 +10,7 @@ add_user_router = APIRouter()
 class AuthAddUser(BaseModel):
     email: str
     password: str
-    name: str
+    # name: str
 
 
 class DeleteUser(BaseModel):
@@ -27,7 +27,7 @@ async def sign_up(
     """
     try:
         create_user(
-            user_name=form_data.name,
+            # user_name=form_data.name,
             user_email=form_data.email,
             password=form_data.password,
 

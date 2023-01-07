@@ -12,7 +12,6 @@ class Users(Base):
     __tablename__ = "user_info"
 
     email_id = Column(String, primary_key=True, nullable=False)
-    name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
 
 

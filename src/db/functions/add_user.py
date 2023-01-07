@@ -3,11 +3,8 @@ from src.db.errors import DataInjectionError, DatabaseErrors, DatabaseConnection
 from src.db.utils import DBConnection
 
 
-def create_user(user_name: str, user_email: str, password: str):
+def create_user(user_email: str, password: str):
     """
-
-
-    :param user_name:
     :param user_email: User Email
     :param password: User Password
     :return: None
@@ -16,14 +13,14 @@ def create_user(user_name: str, user_email: str, password: str):
         with DBConnection(False) as db:
             try:
                 user = Users(
-                    name=user_name,
+                    # name=user_name,
                     email_id=user_email,
                     hashed_password=password,
 
                 )
                 db.add(user)
                 db.commit()
-                return {"message":"user added successfully"}
+                return {"message": "user added successfully"}
             except Exception as e:
                 print(e)
                 raise DataInjectionError
